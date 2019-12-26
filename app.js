@@ -11,6 +11,7 @@ const loadEventListeners = () => {
   form.addEventListener('submit', addTask);
   taskList.addEventListener('click', removeTask);
   clearBtn.addEventListener('click', clearTasks);
+  filter.addEventListener('keyup', filterTasks);
 }
 
 // Functions
@@ -47,6 +48,22 @@ const clearTasks = () => {
   while(taskList.firstChild){
     taskList.removeChild(taskList.firstChild);
   }
+}
+
+const filterTasks = (event) => {
+  const text = event.target.value.toLowerCase();
+  
+  document.querySelectorAll('.collection-item').forEach(
+    function(task){
+      const item = task.firstChild.textContent;
+      if(item.toLowerCase().indexOf(text) != -1){
+        task.style.display = 'block';
+      } else {
+        task.style.display = 'none';
+      }
+    }
+  )
+
 }
 
 // Call function that load all events lisnteners
