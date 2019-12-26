@@ -9,10 +9,11 @@ const clearBtn = document.querySelector('.clear-tasks');
 //Function with events
 const loadEventListeners = () => {
   form.addEventListener('submit', addTask);
-};
+  taskList.addEventListener('click', removeTask);
+  clearBtn.addEventListener('click', clearTasks);
+}
 
 // Functions
-
 const addTask = (event) => {
   if(taskInput.value === ''){
     alert('Adda a task');
@@ -34,7 +35,19 @@ const addTask = (event) => {
   //clear input field
   taskInput.value = '';
   event.preventDefault();
-};
+}
+
+const removeTask = (event) => {
+  if(event.target.parentElement.classList.contains('delete-item')){
+    event.target.parentElement.parentElement.remove();
+  }
+}
+
+const clearTasks = () => {
+  while(taskList.firstChild){
+    taskList.removeChild(taskList.firstChild);
+  }
+}
 
 // Call function that load all events lisnteners
 loadEventListeners();
